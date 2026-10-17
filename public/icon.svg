@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="128" fill="#0B0D13"/>
+  <defs>
+    <linearGradient id="orbitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+    <linearGradient id="coreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#818CF8"/>
+    </linearGradient>
+  </defs>
+  <!-- Geometric constellation diamond & planetary orbit -->
+  <circle cx="256" cy="256" r="140" fill="none" stroke="url(#orbitGrad)" stroke-width="24" stroke-dasharray="16 12" opacity="0.6"/>
+  <rect x="180" y="180" width="152" height="152" rx="40" transform="rotate(45 256 256)" fill="url(#orbitGrad)"/>
+  <circle cx="256" cy="256" r="36" fill="#0B0D13"/>
+  <circle cx="256" cy="256" r="20" fill="url(#coreGrad)"/>
+  <circle cx="256" cy="116" r="16" fill="#38BDF8"/>
+  <circle cx="396" cy="256" r="14" fill="#8B5CF6"/>
+  <circle cx="256" cy="396" r="12" fill="#A78BFA"/>
+  <circle cx="116" cy="256" r="14" fill="#6366F1"/>
+</svg>

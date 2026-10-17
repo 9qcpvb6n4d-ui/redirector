@@ -1,0 +1,102 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with display settings and preferences",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Auth UID of the user" },
+        "email": { "type": "string", "description": "Email address" },
+        "displayName": { "type": "string", "description": "User full name or handle" },
+        "theme": { "type": "string", "enum": ["dark", "light"], "description": "UI theme preference" },
+        "defaultView": { "type": "string", "enum": ["grid", "table"], "description": "Resource view style" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Account setup timestamp" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Resource": {
+      "title": "Resource",
+      "description": "Saved internet resource, link, tool, repo, or document",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Document ID" },
+        "ownerId": { "type": "string", "description": "UID of owner" },
+        "url": { "type": "string", "maxLength": 2048, "description": "Destination URL" },
+        "title": { "type": "string", "maxLength": 256, "description": "Resource title" },
+        "description": { "type": "string", "maxLength": 1000, "description": "Summary or excerpt" },
+        "domain": { "type": "string", "maxLength": 128, "description": "Hostname" },
+        "faviconUrl": { "type": "string", "maxLength": 1024, "description": "Favicon image URL" },
+        "resourceType": {
+          "type": "string",
+          "enum": ["website", "github", "ai_tool", "docs", "tutorial", "api", "video", "article", "course"]
+        },
+        "collectionId": { "type": "string", "description": "Parent collection ID or empty" },
+        "workspaceIds": { "type": "string", "description": "Comma-separated or serialized workspace IDs" },
+        "tags": { "type": "string", "description": "Comma-separated tags" },
+        "notes": { "type": "string", "maxLength": 5000, "description": "Personal user notes" },
+        "isFavorite": { "type": "boolean", "description": "Starred link" },
+        "isPinned": { "type": "boolean", "description": "Pinned to quick access" },
+        "isArchived": { "type": "boolean", "description": "Archived status" },
+        "githubStars": { "type": "number", "description": "GitHub star count if applicable" },
+        "githubLanguage": { "type": "string", "description": "GitHub primary language" },
+        "clickCount": { "type": "number", "description": "Open count" },
+        "lastOpenedAt": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["ownerId", "url", "title"]
+    },
+    "Collection": {
+      "title": "Collection",
+      "description": "Visual folder of curated resources",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Document ID" },
+        "ownerId": { "type": "string", "description": "UID of owner" },
+        "name": { "type": "string", "maxLength": 128, "description": "Collection name" },
+        "description": { "type": "string", "maxLength": 500, "description": "Collection description" },
+        "icon": { "type": "string", "maxLength": 64, "description": "Lucide icon name" },
+        "color": { "type": "string", "maxLength": 32, "description": "Accent color name or hex" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["ownerId", "name"]
+    },
+    "Workspace": {
+      "title": "Workspace",
+      "description": "Custom project command center workspace",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Document ID" },
+        "ownerId": { "type": "string", "description": "UID of owner" },
+        "name": { "type": "string", "maxLength": 128, "description": "Workspace name" },
+        "description": { "type": "string", "maxLength": 500, "description": "Workspace purpose" },
+        "icon": { "type": "string", "maxLength": 64, "description": "Workspace icon" },
+        "color": { "type": "string", "maxLength": 32, "description": "Workspace theme accent" },
+        "projectNotes": { "type": "string", "maxLength": 5000, "description": "Workspace scratchpad" },
+        "pinnedResourceIds": { "type": "string", "description": "Serialized pinned resource IDs" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["ownerId", "name"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profile documents"
+    },
+    "/resources/{resourceId}": {
+      "schema": { "$ref": "#/entities/Resource" },
+      "description": "Saved internet resources"
+    },
+    "/collections/{collectionId}": {
+      "schema": { "$ref": "#/entities/Collection" },
+      "description": "Visual collections"
+    },
+    "/workspaces/{workspaceId}": {
+      "schema": { "$ref": "#/entities/Workspace" },
+      "description": "Project workspaces"
+    }
+  }
+}

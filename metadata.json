@@ -1,0 +1,6 @@
+{
+  "name": "MySpace — Your Personal Internet",
+  "description": "A personal operating system and command center to save, organize, and discover tools, GitHub repos, documentation, and web resources.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
